@@ -71,13 +71,6 @@ export const TodoHeader: React.FC<Props> = ({
   };
 
   const handleToggle = () => {
-    // todos.forEach(todo =>
-    //   onUpdate({
-    //     ...todo,
-    //     completed: isAllCompleted ? false : true,
-    //   }),
-    // );
-
     if (isAllCompleted) {
       todos.map(todo => onUpdate({ ...todo, completed: false }));
     } else {

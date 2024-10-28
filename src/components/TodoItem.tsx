@@ -21,7 +21,6 @@ export const TodoItem: React.FC<Props> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(todo.title);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [isChecked, setIsChecked] = useState(todo.completed);
 
   const todoTitleUpdate = useRef<HTMLInputElement>(null);
 
@@ -50,7 +49,6 @@ export const TodoItem: React.FC<Props> = ({
     onUpdate(todoToUpdate)
       .then(() => {
         setIsEditing(false);
-        setIsChecked(todoToUpdate.completed);
       })
       .catch(() => {
         setIsEditing(true);
@@ -73,7 +71,6 @@ export const TodoItem: React.FC<Props> = ({
     onUpdate(todoToUpdate)
       .then(() => {
         setIsEditing(false);
-        setIsChecked(!todo.completed);
         setIsUpdating(false);
       })
       .catch(() => {
@@ -107,12 +104,8 @@ export const TodoItem: React.FC<Props> = ({
     todoTitleUpdate.current?.focus();
   }, [isEditing, isUpdating]);
 
-  useEffect(() => {
-    setIsChecked(todo.completed);
-  }, [todo]);
-
   return (
-    <div data-cy="Todo" className={cn('todo', { completed: isChecked })}>
+    <div data-cy="Todo" className={cn('todo', { completed: todo.completed })}>
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
